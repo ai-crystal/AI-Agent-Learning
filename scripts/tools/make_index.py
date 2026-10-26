@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""根据 papers/ 里实际存在的文件生成 INDEX.md。"""
+"""根据 assets/.local/papers/ 里实际存在的文件生成 INDEX.md。"""
 import os, re, sys, glob
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from papers_list import PAPERS
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PAPERS_DIR = os.path.join(ROOT, "papers")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PAPERS_DIR = os.path.join(ROOT, "assets", ".local", "papers")
 
 # 后来改名或补充的条目
 RENAME = {
@@ -55,7 +55,7 @@ out = ["# 论文与资料清单", "",
        "书里引用的原始文献都在这里，共 %d 份（%d 篇论文 + %d 份规范与工程文档）。"
        % (len(have), len(have) - len(DOCS), len(DOCS)),
        "", "文件名格式是 `短名__arXiv编号.pdf`，按编号可以直接在 arXiv 上找到原文。"
-       "想补充新论文，把编号加进 `tools/papers_list.py`，再运行 `python tools/fetch_papers.py`。", ""]
+       "想补充新论文，把编号加进 `scripts/tools/papers_list.py`，再运行 `python scripts/tools/fetch_papers.py`。", ""]
 for ch in ORDER:
     if ch not in by:
         continue

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""把关键的网页资料（博客、规范）打印成 PDF，放进 papers/。"""
+"""把关键的网页资料（博客、规范）打印成 PDF，放进 assets/.local/papers/。"""
 import os, sys
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from playwright.sync_api import sync_playwright
 
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "papers")
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                   "assets", ".local", "papers")
 DOCS = [
     ("doc-anthropic-building-effective-agents.pdf", "https://www.anthropic.com/engineering/building-effective-agents"),
     ("doc-anthropic-context-engineering.pdf", "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"),

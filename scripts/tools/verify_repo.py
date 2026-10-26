@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 PDF = ROOT / "从语言模型到智能体.pdf"
 MD_FILES = [ROOT / "README.md", ROOT / "PUBLISHING.md", *sorted((ROOT / "book").glob("*.md"))]
 
@@ -58,7 +58,9 @@ def main() -> int:
             if not path.exists():
                 errors.append(f"{md.relative_to(ROOT)} 链接目标不存在：{raw}")
 
-    for required in (ROOT / "book", ROOT / "book" / "figures", ROOT / "figures", PDF):
+    for required in (ROOT / "book", ROOT / "book" / "figures",
+                     ROOT / "scripts" / "figures", ROOT / "scripts" / "tools",
+                     ROOT / "assets" / "katex", ROOT / "assets" / "logo", PDF):
         if not required.exists():
             errors.append(f"缺少必需路径：{required.relative_to(ROOT)}")
 

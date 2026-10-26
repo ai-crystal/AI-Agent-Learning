@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""把书稿涉及的论文下载到 papers/，并用首页文本校验标题是否对得上。"""
+"""把书稿涉及的论文下载到 assets/.local/papers/，并用首页文本校验标题是否对得上。"""
 import os, sys, subprocess, json, time
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from papers_list import PAPERS
 import fitz
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "papers")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "assets", ".local", "papers")
 os.makedirs(OUT, exist_ok=True)
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"

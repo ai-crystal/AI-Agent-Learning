@@ -7,7 +7,7 @@
 只会出现在少数几个标题上，肉眼翻页很难全部发现，所以用脚本对比：
 把 book/*.md 里的每个标题逐字拿到 PDF 文本层里查一遍。
 
-用法：python tools/verify_pdf_text.py [pdf路径]
+用法：python scripts/tools/verify_pdf_text.py [pdf路径]
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pymupdf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 BOOK = ROOT / "book"
 DEFAULT_PDF = ROOT / "从语言模型到智能体.pdf"
 

@@ -9,7 +9,7 @@ from matplotlib.lines import Line2D
 import numpy as np
 
 OUT = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(OUT)
+ROOT = os.path.dirname(os.path.dirname(OUT))
 OUT = os.path.join(ROOT, "book", "figures")
 os.makedirs(OUT, exist_ok=True)
 INK = "#1c1c1c"

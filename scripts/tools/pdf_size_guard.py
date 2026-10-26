@@ -2,9 +2,9 @@
 """保证最终 PDF 不超过体积上限；超限时重采样内嵌图片。
 
 用法：
-    python tools/pdf_size_guard.py               # 默认检查并尝试压缩主 PDF
-    python tools/pdf_size_guard.py --check       # 只检查，不修改，超限返回 1
-    python tools/pdf_size_guard.py path.pdf --limit 20
+    python scripts/tools/pdf_size_guard.py               # 默认检查并尝试压缩主 PDF
+    python scripts/tools/pdf_size_guard.py --check       # 只检查，不修改，超限返回 1
+    python scripts/tools/pdf_size_guard.py path.pdf --limit 20
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PDF = ROOT / "从语言模型到智能体.pdf"
 MIB = 1024 * 1024
 

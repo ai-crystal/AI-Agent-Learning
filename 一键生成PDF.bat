@@ -52,7 +52,7 @@ if errorlevel 1 (
 )
 
 echo [3/4] 重绘插图 ...
-pushd figures
+pushd scripts\figures
 "%PYEXE%" figs_a.py
 "%PYEXE%" figs_b.py
 "%PYEXE%" figs_c.py
@@ -74,7 +74,7 @@ if errorlevel 1 (
 )
 
 echo [5/5] 校验 PDF（标题与字体内嵌）...
-"%PYEXE%" tools\verify_pdf_text.py
+"%PYEXE%" scripts\tools\verify_pdf_text.py
 if errorlevel 1 (
   echo.
   echo [警告] 上面列出的标题没有正确进入 PDF，或字体内嵌异常。

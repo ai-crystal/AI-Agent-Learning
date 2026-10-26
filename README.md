@@ -44,19 +44,19 @@ GitHub 会直接渲染各章 Markdown 和书内插图。可以按顺序读，也
 
 ## 仓库内容
 
+根目录只保留三个内容目录：
+
 ```text
 book/                 各章 Markdown；book/figures/ 是正文直接引用的插图
-figures/              matplotlib 插图生成脚本
-assets/katex/         离线公式渲染资源
-assets/logo/          封面与封底图片
-examples/             最小 agent 的可运行示例
-tools/                构建自检、链接检查和 PDF 体积保护
-build.py              Markdown -> HTML -> PDF
-style.css             PDF 排版样式
-从语言模型到智能体.pdf   可直接下载阅读的完整书稿
+assets/               KaTeX、封面与封底；assets/.local/ 是本地大文件，不进入 Git
+scripts/figures/      matplotlib 插图生成脚本
+scripts/tools/        构建自检、链接检查和 PDF 体积保护
+scripts/examples/     最小 agent 的可运行示例
 ```
 
-为了保持仓库轻量，以下内容**不进入 Git**：`build/` 编译中间产物、`papers/` 论文 PDF、`logo/` 原始大图、`assets/package/` 重复的 npm 包，以及 Python 缓存和本地环境文件。需要重新抓取论文时使用 `tools/fetch_papers.py`。
+根目录另有 `build.py`、`style.css`、`requirements.txt`、`README.md`、`PUBLISHING.md` 和完整 PDF。
+
+为了保持仓库轻量，`assets/.local/` 不进入 Git，其中保存编译中间产物、论文 PDF、原始大图和重复的 npm 包。需要重新抓取论文时使用 `scripts/tools/fetch_papers.py`。
 
 ## 本地构建
 
@@ -69,9 +69,9 @@ python -m pip install -r requirements.txt
 重新生成插图并编译 PDF：
 
 ```bash
-python figures/figs_a.py
-python figures/figs_b.py
-python figures/figs_c.py
+python scripts/figures/figs_a.py
+python scripts/figures/figs_b.py
+python scripts/figures/figs_c.py
 python build.py
 ```
 
@@ -80,17 +80,22 @@ Windows 也可以直接双击 `一键生成PDF.bat`。构建完成后会运行�
 单独检查：
 
 ```bash
-python tools/verify_pdf_text.py
-python tools/pdf_size_guard.py --check
-python tools/verify_repo.py
+python scripts/tools/verify_pdf_text.py
+python scripts/tools/pdf_size_guard.py --check
+python scripts/tools/verify_repo.py
 ```
 
 ## 两个构建约束
 
-**字体必须是静态字体。** 正文用宋体（SimSun），标题和强调用微软雅黑（Microsoft YaHei），代码用 Consolas。Chrome 无法正确嵌入 `*VF` 变量字体，会出现 Type3 字形和标题乱码；`tools/verify_pdf_text.py` 会检查这个问题。
+**字体必须是静态字体。** 正文用宋体（SimSun），标题和强调用微软雅黑（Microsoft YaHei），代码用 Consolas。Chrome 无法正确嵌入 `*VF` 变量字体，会出现 Type3 字形和标题乱码；`scripts/tools/verify_pdf_text.py` 会检查这个问题。
 
-**PDF 不得超过 20 MiB。** `build.py` 保存 PDF 后会调用 `tools/pdf_size_guard.py`。未超限时不做任何处理；超限时按 150/120/96 dpi 逐级重采样内嵌图片，仍无法压到 20 MiB 就中止并保留原文件。需要更低分辨率时，优先降低 `figures/` 里的图片生成 dpi，而不是删正文。
+**PDF 不得超过 20 MiB。** `build.py` 保存 PDF 后会调用 `scripts/tools/pdf_size_guard.py`。未超限时不做任何处理；超限时按 150/120/96 dpi 逐级重采样内嵌图片，仍无法压到 20 MiB 就中止并保留原文件。需要更低分辨率时，优先降低 `scripts/figures/` 里的图片生成 dpi，而不是删正文。
 
 ## 更新与发布
 
-仓库维护步骤见 [PUBLISHING.md](PUBLISHING.md)。每次推送后，GitHub 的 **Actions → book-check** 会自动检查章节图片、相对链接和 PDF 体积。
+仓库维护步骤见 [PUBLISHING.md](PUBLISHING.md)。GitHub 网页会直接渲染提交后的 Markdown；推送前可以在本地运行：
+
+```bash
+python scripts/tools/verify_repo.py
+python scripts/tools/pdf_size_guard.py --check
+```

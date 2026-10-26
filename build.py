@@ -12,7 +12,7 @@ import markdown
 from pygments.formatters import HtmlFormatter
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-BUILD = os.path.join(ROOT, "build")
+BUILD = os.path.join(ROOT, "assets", ".local", "build")
 BOOK = os.path.join(ROOT, "book")
 ASSETS = os.path.join(ROOT, "assets")
 OUT_PDF = os.path.join(ROOT, "从语言模型到智能体.pdf")
@@ -356,7 +356,7 @@ def main():
     page_count = len(out)
     out.close()
 
-    guard = os.path.join(ROOT, "tools", "pdf_size_guard.py")
+    guard = os.path.join(ROOT, "scripts", "tools", "pdf_size_guard.py")
     if os.path.exists(guard):
         result = subprocess.run([sys.executable, guard, target])
         if result.returncode != 0:

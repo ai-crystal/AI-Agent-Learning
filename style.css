@@ -48,7 +48,7 @@ h4 { font-size: 10.5pt; margin: 1em 0 0.3em 0; color: #333; }
 
 /* 强调 */
 /* 正文强调走黑体：宋体（SimSun）没有粗体字面，而变量字体的 Bold 实例会被
-   Chrome 拆成 Type3 字形（见 tools/verify_pdf_text.py），所以正文用宋体、
+   Chrome 拆成 Type3 字形（见 scripts/tools/verify_pdf_text.py），所以正文用宋体、
    强调用微软雅黑 Bold —— 这也是中文书籍的常规搭配（宋体正文 + 黑体强调）。 */
 strong { font-family: "Microsoft YaHei", sans-serif; font-weight: 700; color: #000; }
 em { font-style: normal; }

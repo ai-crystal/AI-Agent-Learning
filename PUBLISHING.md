@@ -1,6 +1,6 @@
 # 发布到 GitHub
 
-这个仓库已经按“GitHub 网页直接读 Markdown + 根目录直接下载 PDF”的方式整理。下面是首次发布和后续更新步骤。
+这个仓库已经按“GitHub 网页直接读 Markdown + 根目录直接下载 PDF”的方式整理，根目录只有 `book/`、`assets/`、`scripts/` 三个内容目录。下面是首次发布和后续更新步骤。
 
 ## 1. 在 GitHub 创建空仓库
 
@@ -47,7 +47,6 @@ git config --global user.email "你的邮箱"
 1. 打开仓库主页，README 就是在线阅读入口。
 2. 点“在线阅读”表格里的章节，GitHub 会直接渲染 Markdown、公式和 `book/figures/` 里的插图。
 3. 点根目录的 `从语言模型到智能体.pdf`，在 GitHub 的 PDF 查看器右上角点 **Download**。
-4. 点仓库顶部 **Actions → book-check**，可以看自动检查结果；每次 push 都会重新运行。
 
 GitHub 网页渲染是即时的，不需要额外部署。若浏览器仍显示旧内容，强制刷新一次（`Ctrl+F5`）。
 
@@ -66,27 +65,27 @@ git push
 如果只想重新生成书：
 
 ```bat
-python figures\figs_a.py
-python figures\figs_b.py
-python figures\figs_c.py
+python scripts\figures\figs_a.py
+python scripts\figures\figs_b.py
+python scripts\figures\figs_c.py
 python build.py
-python tools\verify_pdf_text.py
-python tools\verify_repo.py
+python scripts\tools\verify_pdf_text.py
+python scripts\tools\verify_repo.py
 ```
 
-`build.py` 会自动执行 `tools/pdf_size_guard.py`。PDF 超过 20 MiB 时会先尝试压缩内嵌图片；仍然超限则构建失败，不会把超限 PDF 当成成功结果。
+`build.py` 会自动执行 `scripts/tools/pdf_size_guard.py`。PDF 超过 20 MiB 时会先尝试压缩内嵌图片；仍然超限则构建失败，不会把超限 PDF 当成成功结果。
 
 ## 5. 哪些文件不会上传
 
 `.gitignore` 已排除：
 
 ```text
-build/            编译中间文件和测试 PDF
-papers/           论文原始 PDF，约 274 MB
-logo/             封面用原始大图，约 17 MB
-assets/package/   重复的 KaTeX npm 包
-assets/katex.tgz  KaTeX 压缩包
-__pycache__/      Python 缓存
+assets/.local/build/       编译中间文件和测试 PDF
+assets/.local/papers/      论文原始 PDF，约 274 MB
+assets/.local/source-logo/ 封面用原始大图，约 17 MB
+assets/.local/package/     重复的 KaTeX npm 包
+assets/.local/katex.tgz    KaTeX 压缩包
+__pycache__/               Python 缓存
 ```
 
 这些文件仍保留在本地，不影响构建。不要用 `git add -f` 强行加入；GitHub 单文件限制为 100 MB，而本书要求最终 PDF 不超过 20 MiB。
