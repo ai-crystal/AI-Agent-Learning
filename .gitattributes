@@ -1,0 +1,12 @@
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.md text eol=lf
+*.py text eol=lf
+*.css text eol=lf
+*.yml text eol=lf
+*.bat text eol=crlf

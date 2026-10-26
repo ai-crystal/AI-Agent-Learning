@@ -1,0 +1,158 @@
+/* ===== 书籍排版样式 ===== */
+@page { size: 170mm 240mm; }
+
+html { font-size: 10.5pt; }
+
+body {
+  font-family: "SimSun", "Songti SC", "Source Han Serif SC", serif;
+  font-size: 10.5pt;
+  line-height: 1.82;
+  color: #1a1a1a;
+  margin: 0;
+  text-align: justify;
+  -webkit-font-smoothing: antialiased;
+}
+
+p { margin: 0 0 0.62em 0; text-indent: 2em; orphans: 2; widows: 2; }
+p.noindent, li p { text-indent: 0; }
+
+/* 标题 */
+h1, h2, h3, h4, h5 {
+  font-family: "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif;
+  font-weight: 700;
+  color: #111;
+  text-indent: 0;
+  break-after: avoid;
+}
+h1 {
+  font-size: 22pt;
+  line-height: 1.35;
+  margin: 0 0 2.2em 0;
+  padding-bottom: 0.5em;
+  border-bottom: 2.5pt solid #1a1a1a;
+  break-before: page;
+  letter-spacing: 0.01em;
+}
+h2 {
+  font-size: 14pt;
+  margin: 1.5em 0 0.6em 0;
+  padding-left: 0.5em;
+  border-left: 4pt solid #b03030;
+}
+h3 {
+  font-size: 11.5pt;
+  margin: 1.15em 0 0.4em 0;
+  color: #222;
+}
+h4 { font-size: 10.5pt; margin: 1em 0 0.3em 0; color: #333; }
+
+/* 强调 */
+/* 正文强调走黑体：宋体（SimSun）没有粗体字面，而变量字体的 Bold 实例会被
+   Chrome 拆成 Type3 字形（见 tools/verify_pdf_text.py），所以正文用宋体、
+   强调用微软雅黑 Bold —— 这也是中文书籍的常规搭配（宋体正文 + 黑体强调）。 */
+strong { font-family: "Microsoft YaHei", sans-serif; font-weight: 700; color: #000; }
+em { font-style: normal; }
+
+/* 引用 / 提示块 */
+blockquote {
+  margin: 1em 0;
+  padding: 0.7em 0.9em 0.7em 1em;
+  border-left: 3pt solid #999;
+  background: #f6f6f4;
+  color: #333;
+  font-size: 9.8pt;
+}
+blockquote p { text-indent: 0; margin-bottom: 0.35em; }
+blockquote p:last-child { margin-bottom: 0; }
+
+/* 代码 */
+pre {
+  font-family: "Consolas", "Cascadia Mono", "DejaVu Sans Mono", monospace;
+  font-size: 8.0pt;
+  line-height: 1.48;
+  background: #f7f7f5;
+  border: 0.5pt solid #ddd;
+  border-radius: 2pt;
+  padding: 0.65em 0.8em;
+  margin: 0.9em 0 1em 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  break-inside: auto;
+  orphans: 4;
+  widows: 4;
+  text-align: left;
+  text-indent: 0;
+}
+code {
+  font-family: "Consolas", "Cascadia Mono", "DejaVu Sans Mono", monospace;
+  font-size: 0.87em;
+  background: #f2f2ef;
+  padding: 0.05em 0.25em;
+  border-radius: 2pt;
+}
+pre code { background: none; padding: 0; font-size: 1em; }
+
+/* 表格 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.8em 0 1em 0;
+  font-size: 9pt;
+  line-height: 1.5;
+  break-inside: avoid;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+th, td { border: 0.5pt solid #ccc; padding: 0.4em 0.55em; text-align: left; vertical-align: top; }
+th { background: #eeeeeb; font-weight: 700; }
+td p, th p { text-indent: 0; margin: 0; }
+
+/* 图 */
+figure {
+  margin: 1.1em 0 1.2em 0;
+  text-align: center;
+  break-inside: avoid;
+}
+figure img { max-width: 100%; }
+figcaption {
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 8.8pt;
+  color: #333;
+  margin-top: 0.45em;
+  line-height: 1.5;
+  text-align: center;
+  text-indent: 0;
+}
+
+/* 列表 */
+ul, ol { margin: 0.5em 0 0.8em 0; padding-left: 2.1em; }
+li { margin-bottom: 0.25em; text-align: left; }
+li::marker { color: #b03030; }
+
+/* 分隔线 */
+hr { border: none; border-top: 0.6pt solid #ddd; margin: 1.4em 0; }
+
+/* 数学 */
+.katex { font-size: 1.02em; }
+.katex-display { margin: 0.7em 0 !important; }
+
+/* 首页 / 目录 */
+.cover { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 22mm; }
+.toc h1 { border-bottom: 2.5pt solid #1a1a1a; break-before: auto; }
+.toc-list { font-family: "Microsoft YaHei", sans-serif; font-size: 9.4pt; line-height: 1.62; }
+.toc-item { display: flex; align-items: baseline; }
+.toc-item .t { white-space: nowrap; }
+.toc-item .dots { flex: 1 1 auto; border-bottom: 0.5pt dotted #aaa; margin: 0 0.35em; transform: translateY(-0.28em); }
+.toc-item .pg { flex: 0 0 2.2em; text-align: right; font-variant-numeric: tabular-nums; }
+.toc-item.lv1 { font-weight: 700; margin-top: 0.5em; font-size: 10.0pt; line-height: 1.9; }
+.toc-item.lv2 { padding-left: 1.6em; font-weight: 400; color: #333; font-size: 9.1pt; line-height: 1.62; }
+.body-sentinel { font-size: 1pt; color: #ffffff; height: 0; line-height: 0; }
+
+/* 术语行 */
+dl { margin: 0.8em 0 1em 0; }
+dt { font-weight: 700; font-family: "Microsoft YaHei", sans-serif; font-size: 9.6pt;
+     margin-top: 0.55em; text-indent: 0; }
+dd { margin: 0.1em 0 0 1.6em; text-indent: 0; font-size: 9.8pt; line-height: 1.75; }
+
+/* 需要强制另起一页的章节，用于避免标题孤悬在页底 */
+.pagebreak { break-before: page; }

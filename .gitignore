@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+*.log
+
+# 编译中间产物与临时文件
+/build/
+*.tmp
+*.bak
+从语言模型到智能体(新).pdf
+
+# 不进入书稿仓库的原始大材料（只排除仓库根目录）
+/papers/
+/logo/
+/assets/package/
+/assets/katex.tgz
+
+# 编辑器与操作系统
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
