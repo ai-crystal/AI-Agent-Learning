@@ -1,8 +1,7 @@
-# 编译中间产物与临时文件
-/assets/.local/
+# 编译中间产物与本地私有资料
+/_private/
 *.tmp
 *.bak
-从语言模型到智能体(新).pdf
 
 # Python 缓存和本地环境
 __pycache__/
