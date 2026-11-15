@@ -1,24 +1,15 @@
 # -*- coding: utf-8 -*-
-"""检查 GitHub 网页阅读所需的本地链接、插图和 PDF 是否存在。"""
+"""检查系列书站点的本地链接、插图、书稿和 PDF。"""
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parents[3]
-PDF = ROOT / "output" / "book.pdf"
-BOOK = ROOT / "book"
-MD_FILES = [
-    ROOT / "README.md",
-    ROOT / "_sidebar.md",
-    ROOT / "_coverpage.md",
-    *sorted((BOOK / "front").glob("*.md")),
-    *sorted((BOOK / "chapters").glob("*.md")),
-    *sorted((BOOK / "appendix").glob("*.md")),
-]
-
+ROOT = Path(__file__).resolve().parents[2]
+BOOKS = sorted(p for p in (ROOT / "books").iterdir() if (p / "book.json").is_file())
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 LINK_RE = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
 FENCE_RE = re.compile(r"```.*?```", re.S)
@@ -42,10 +33,38 @@ def local_target(raw: str):
 def main() -> int:
     errors: list[str] = []
     images = links = 0
+    required_root = [
+        ROOT / "README.md", ROOT / "index.html", ROOT / "_sidebar.md",
+        ROOT / "_coverpage.md", ROOT / ".nojekyll",
+    ]
+    for path in required_root:
+        if not path.exists():
+            errors.append(f"缺少站点文件：{path.relative_to(ROOT)}")
 
-    for md in MD_FILES:
+    md_files = [ROOT / "README.md", ROOT / "_sidebar.md", ROOT / "_coverpage.md"]
+    for book in BOOKS:
+        for name in ("README.md",):
+            p = book / name
+            if p.is_file():
+                md_files.append(p)
+        for folder in ("front", "chapters", "appendix"):
+            md_files.extend(sorted((book / folder).glob("*.md")))
+        for folder in ("front", "chapters", "appendix"):
+            if not (book / folder).exists():
+                errors.append(f"缺少书稿目录：{(book / folder).relative_to(ROOT)}")
+        cfg = json.loads((book / "book.json").read_text(encoding="utf-8"))
+        pdf = book / "output" / cfg.get("pdf", book.name + ".pdf")
+        if not pdf.is_file():
+            errors.append(f"缺少 PDF：{pdf.relative_to(ROOT)}")
+        else:
+            mb = pdf.stat().st_size / (1024 * 1024)
+            print(f"PDF {book.name}: {mb:.2f} MiB")
+            if mb > 20:
+                errors.append(f"PDF 超过 20 MiB：{pdf.relative_to(ROOT)}")
+
+    for md in md_files:
         if not md.is_file():
-            errors.append(f"缺少 Markdown 文件：{md.relative_to(ROOT)}")
+            errors.append(f"缺少 Markdown：{md.relative_to(ROOT)}")
             continue
         text = strip_code(md.read_text(encoding="utf-8"))
         for raw in IMAGE_RE.findall(text):
@@ -67,28 +86,15 @@ def main() -> int:
             if not path.exists():
                 errors.append(f"{md.relative_to(ROOT)} 链接目标不存在：{raw}")
 
-    for required in (BOOK / "front", BOOK / "chapters", BOOK / "appendix",
-                     BOOK / "images", BOOK / "code", BOOK / "build",
-                     ROOT / "index.html", ROOT / "_sidebar.md",
-                     ROOT / "_coverpage.md", ROOT / ".nojekyll", PDF):
-        if not required.exists():
-            errors.append(f"缺少必需路径：{required.relative_to(ROOT)}")
-
-    if PDF.is_file():
-        mb = PDF.stat().st_size / (1024 * 1024)
-        print(f"PDF：{mb:.2f} MiB")
-        if mb > 20:
-            errors.append(f"PDF 超过 20 MiB：{mb:.2f} MiB")
-    else:
-        errors.append("缺少完整 PDF：output/book.pdf")
-
-    print(f"检查 {len(MD_FILES)} 个 Markdown 文件，{images} 个本地图片，{links} 个本地链接。")
+    if not BOOKS:
+        errors.append("books/ 下没有找到书籍配置")
+    print(f"检查 {len(BOOKS)} 本书、{len(md_files)} 个 Markdown、{images} 个图片、{links} 个本地链接。")
     if errors:
         print("\n发现问题：")
         for item in errors:
             print(" -", item)
         return 1
-    print("PASS：章节、图片、链接和 PDF 均可用。")
+    print("PASS：系列书稿、站点、图片、链接和 PDF 均可用。")
     return 0
 
 

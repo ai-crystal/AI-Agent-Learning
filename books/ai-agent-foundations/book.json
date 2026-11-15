@@ -1,0 +1,11 @@
+{
+  "slug": "ai-agent-foundations",
+  "title": "从语言模型到智能体",
+  "subtitle": "AI Agent 的技术演进与工程实现",
+  "author": "Dr. Dezeming",
+  "pdf": "ai-agent-foundations.pdf",
+  "cover_tag": "AI AGENT / VOL. 1",
+  "cover_note": "从下一个词预测，到能在真实世界里连续工作数小时的智能体<br>十六章，一条从背景动机走到工程实现的路",
+  "back_text": "一个只会预测下一个词的模型，为什么不能直接拿来做事？<br>它缺的不是知识，而是反馈、状态和后果。<br><br>这本书从 2020 年那个只会接着往下写的模型讲起，一路讲到今天可以连续工作几个小时的智能体。思维链、ReAct、工具、记忆、上下文、Harness、多 Agent、训练、评测与安全，逐层补上工程系统需要的缺口。",
+  "keywords": "AI Agent, LLM, ReAct, Harness, 上下文工程"
+}

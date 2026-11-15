@@ -1,9 +1,12 @@
 # 从语言模型到智能体
 
-> 从下一个词预测，到能在真实世界里连续工作数小时的智能体。
+> 一套从模型能力、工程系统到知识检索的 AI Agent 书系。
 
 **Dr. Dezeming**
 
-[开始阅读](/#/book/front/preface)
+[第一本：入门](/#/books/ai-agent-foundations/README)
 
-<a class="cover-download" href="output/book.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>
+[第二本：RAG 与上下文](/#/books/rag-context-rerank/README)
+
+<a class="cover-download" href="books/ai-agent-foundations/output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>第一本 PDF</a>
+<a class="cover-download" href="books/rag-context-rerank/output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>第二本 PDF</a>

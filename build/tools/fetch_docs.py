@@ -4,7 +4,7 @@ import os, sys
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from playwright.sync_api import sync_playwright
 
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
                    "_private", "papers")
 DOCS = [
     ("doc-anthropic-building-effective-agents.pdf", "https://www.anthropic.com/engineering/building-effective-agents"),

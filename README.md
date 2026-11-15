@@ -1,51 +1,33 @@
-# 从语言模型到智能体
+# 从语言模型到智能体 · 系列书
 
-> 从下一个词预测，到能在真实世界里连续工作数小时的智能体。
+> 一套从模型能力、工程系统到知识检索的 AI Agent 书系。
 
 作者：Dr. Dezeming
 
-**[在线阅读](https://ai-crystal.github.io/AI-Agent-Learning/)**　·　**<a href="output/book.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>**
+**[打开在线阅读站](https://ai-crystal.github.io/AI-Agent-Learning/)**　·　**<a href="books/ai-agent-foundations/output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>第一本 PDF</a>**　·　**<a href="books/rag-context-rerank/output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>第二本 PDF</a>**
 
-这是一本面向零前端、零后端、零机器学习基础读者的 AI Agent 技术书。全书从语言模型的能力边界讲起，逐步走到 ReAct、工具调用、记忆、上下文工程、代码与 GUI、Harness、多 Agent、训练、评测与安全。
+## 系列书目
 
-## 开始阅读
+### 第一本：从语言模型到智能体
 
-### 前言与导论
+**入门 · AI Agent 的技术演进与工程实现**
 
-- [前言](book/front/preface.md)
-- [第 0 章 预备：这些词到底指什么](book/chapters/ch00.md)
-- [第 1 章 预测下一个词，然后呢](book/chapters/ch01.md)
+从“预测下一个词”讲起，逐步走到 ReAct、工具调用、记忆、上下文工程、代码与 GUI、Harness、多 Agent、训练、评测与安全。
 
-### 第一篇 推理与行动
+[开始阅读](books/ai-agent-foundations/README.md)　·　<a href="books/ai-agent-foundations/output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载 PDF</a>
 
-- [第 2 章 一个 Agent 的最小骨架](book/chapters/ch02.md)
-- [第 3 章 让它先想再说：思维链及其家族](book/chapters/ch03.md)
-- [第 4 章 ReAct：把推理和行动缠在一起](book/chapters/ch04.md)
-- [第 5 章 工具：从提示技巧到模型能力](book/chapters/ch05.md)
+### 第二本：RAG 与上下文工程
 
-### 第二篇 记忆、上下文与行动
+**进阶 · 检索、重排序与可控的上下文**
 
-- [第 6 章 规划、反思与自我修正](book/chapters/ch06.md)
-- [第 7 章 记忆：让 Agent 记住发生过什么](book/chapters/ch07.md)
-- [第 8 章 上下文工程](book/chapters/ch08.md)
-- [第 9 章 用代码行动](book/chapters/ch09.md)
-- [第 10 章 操作界面：浏览器与计算机](book/chapters/ch10.md)
+专门讨论模型不知道、资料会变化或需要出处的场景：文档解析与切块、向量检索、混合检索、重排序、上下文组装、多轮对话、评测和生产化。
 
-### 第三篇 系统、协作与训练
+[开始阅读](books/rag-context-rerank/README.md)　·　<a href="books/rag-context-rerank/output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载 PDF</a>
 
-- [第 11 章 Harness：模型外面那层壳](book/chapters/ch11.md)
-- [第 12 章 协议、平台与常驻 Agent](book/chapters/ch12.md)
-- [第 13 章 多 Agent：协作的收益与代价](book/chapters/ch13.md)
-- [第 14 章 把 Agent 能力训练进模型](book/chapters/ch14.md)
+## 阅读路线
 
-### 第四篇 评测与安全
+- 第一次接触 Agent：从第一本的前言和第 0 章开始。
+- 已经会调用模型，但 RAG 答案没有依据：直接读第二本第 2—7 章。
+- 关心上线、权限和评测：第一本第 11、15、16 章，第二本第 9—10 章。
 
-- [第 15 章 怎么知道它行不行](book/chapters/ch15.md)
-- [第 16 章 安全、可靠与还没解决的问题](book/chapters/ch16.md)
-- [附录 A—C：术语表、延伸阅读、实验环境](book/appendix/appendix.md)
-
-## 完整 PDF
-
-<a href="output/book.pdf" target="_blank" rel="noopener" data-router-ignore>下载 `output/book.pdf`</a>
-
-PDF 包含封面、目录页码、书签和全部插图，适合离线阅读或打印。
+两本书都保留独立的章节、插图、绘图代码和 PDF；系列首页只负责导航，不复制正文。

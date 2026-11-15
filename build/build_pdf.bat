@@ -36,7 +36,7 @@ if errorlevel 1 (
 )
 
 echo [3/4] Build PDF
-"%PYEXE%" build.py
+"%PYEXE%" build_all.py
 if errorlevel 1 (
   echo [ERROR] PDF build failed.
   pause
@@ -48,5 +48,5 @@ echo [4/4] Verify PDF text and site links
 "%PYEXE%" checks\verify_repo.py
 
 echo.
-echo Done: output\book.pdf
+echo Done: books/*/output/*.pdf
 pause

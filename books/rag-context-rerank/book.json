@@ -1,0 +1,11 @@
+{
+  "slug": "rag-context-rerank",
+  "title": "RAG 与上下文工程",
+  "subtitle": "检索、重排序与可控的上下文",
+  "author": "Dr. Dezeming",
+  "pdf": "rag-context-rerank.pdf",
+  "cover_tag": "RAG / CONTEXT / VOL. 2",
+  "cover_note": "把外部知识接进模型，再把合适的证据放进有限的上下文<br>从切块与检索，到重排序、引用与评测",
+  "back_text": "RAG 不是“把文档塞进向量库”这么简单。<br>一个可用的系统要决定切什么、怎样检索、如何重排、把哪些证据放进上下文，以及怎样证明答案真的有依据。<br><br>这本书沿着一条真实请求的路径，讲清检索增强生成、上下文管理和重排序的工程机制。",
+  "keywords": "RAG, retrieval, reranking, context engineering, embeddings, evaluation"
+}

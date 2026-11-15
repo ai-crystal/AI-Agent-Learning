@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>从语言模型到智能体</title>
-  <meta name="description" content="从语言模型到智能体：AI Agent 的技术演进与工程实现">
+  <title>从语言模型到智能体 · 系列书</title>
+  <meta name="description" content="从语言模型到智能体系列书：Agent 入门、RAG、上下文工程与重排序">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/themes/vue.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <style>
@@ -35,7 +35,7 @@
 
   <script>
     window.$docsify = {
-      name: '从语言模型到智能体',
+      name: '从语言模型到智能体 · 系列书',
       repo: 'https://github.com/ai-crystal/AI-Agent-Learning',
       homepage: 'README.md',
       loadSidebar: true,
@@ -67,8 +67,19 @@
       plugins: [
         function (hook) {
           hook.beforeEach(function (markdown) {
-            var imageBase = new URL('book/images/', document.baseURI).href;
-            return markdown.replace(/\.\.\/images\//g, imageBase);
+            var match = location.hash.match(/^#\/books\/([^/]+)\//);
+            var slug = match ? match[1] : '';
+            if (slug) {
+              markdown = markdown.replace(/\.\.\/images\//g,
+                new URL('books/' + slug + '/images/', document.baseURI).href);
+              if (location.hash.indexOf('/README') >= 0) {
+                markdown = markdown.replace(/\]\((front|chapters|appendix)\//g,
+                  '](books/' + slug + '/$1/');
+                markdown = markdown.replace(/href="output\//g,
+                  'href="books/' + slug + '/output/');
+              }
+            }
+            return markdown;
           });
           hook.doneEach(function () {
             if (window.renderMathInElement) {

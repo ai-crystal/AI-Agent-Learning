@@ -1,26 +1,34 @@
 # -*- coding: utf-8 -*-
 """
-把 book/ 下的书稿编译成 PDF。
+把 books/<slug>/ 下的一本书编译成 PDF。
 
-流程：Markdown -> HTML（本地 KaTeX 渲染公式）-> Chrome 打印 PDF
-      -> 扫描标题所在页码回填目录 -> 二次打印 -> 合并封面 -> 加书签
-      -> 构建用 JPEG 插图 -> 字体子集化 -> 20 MiB 体积保护
-用法：python book/build/build.py
-      python book/build/build.py --keep
+用法：
+  python build/build.py --book ai-agent-foundations
+  python build/build.py --book rag-context-rerank
+  python build/build.py --book ai-agent-foundations --keep
 """
 import os, re, sys, shutil, glob, json, subprocess, html as htmlmod
 import markdown
 from pygments.formatters import HtmlFormatter
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-BUILD = os.path.join(ROOT, "_private", "build")
-BOOK = os.path.join(ROOT, "book")
-ASSETS = os.path.join(BOOK, "build", "assets")
-OUTPUT = os.path.join(ROOT, "output")
-OUT_PDF = os.path.join(OUTPUT, "book.pdf")
-STYLE = os.path.join(BOOK, "build", "style.css")
-TITLE = "从语言模型到智能体"
-SUBTITLE = "AI Agent 的技术演进与工程实现"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BOOK_SLUG = "ai-agent-foundations"
+if "--book" in sys.argv:
+    BOOK_SLUG = sys.argv[sys.argv.index("--book") + 1]
+BOOK = os.path.join(ROOT, "books", BOOK_SLUG)
+CONFIG_PATH = os.path.join(BOOK, "book.json")
+if not os.path.isfile(CONFIG_PATH):
+    raise SystemExit(f"缺少书籍配置：{CONFIG_PATH}")
+with open(CONFIG_PATH, encoding="utf-8") as fh:
+    CONFIG = json.load(fh)
+BUILD = os.path.join(ROOT, "_private", "build", BOOK_SLUG)
+ASSETS = os.path.join(ROOT, "build", "assets")
+STYLE = os.path.join(ROOT, "build", "style.css")
+OUTPUT = os.path.join(BOOK, "output")
+OUT_PDF = os.path.join(OUTPUT, CONFIG.get("pdf", BOOK_SLUG + ".pdf"))
+TITLE = CONFIG["title"]
+SUBTITLE = CONFIG["subtitle"]
+AUTHOR = CONFIG.get("author", "Dr. Dezeming")
 
 os.makedirs(BUILD, exist_ok=True)
 os.makedirs(OUTPUT, exist_ok=True)
@@ -30,7 +38,7 @@ def ensure_katex():
     dst = os.path.join(ASSETS, "katex")
     if os.path.isdir(dst) and os.path.exists(os.path.join(dst, "katex.min.js")):
         return
-    raise SystemExit("缺少 book/build/assets/katex，无法渲染 PDF 公式")
+    raise SystemExit("缺少 build/assets/katex，无法渲染 PDF 公式")
 
 # ---------- 2. 读入章节 ----------
 def load_chapters():
@@ -43,7 +51,7 @@ def load_chapters():
     for d in dirs:
         files.extend(sorted(glob.glob(os.path.join(d, "*.md"))))
     if not files:
-        raise SystemExit("book/front、book/chapters 和 book/appendix 下没有 .md 文件")
+        raise SystemExit("books/<slug>/front、chapters 和 appendix 下没有 .md 文件")
     parts = []
     for f in files:
         with open(f, encoding="utf-8") as fh:
@@ -236,8 +244,6 @@ def find_pages(pdf_path, heads):
     return pages, missing, start
 
 # ---------- 6. 封面与封底 ----------
-AUTHOR = "Dr. Dezeming"
-
 COVER = """
 <div style="position:relative;width:170mm;height:240mm;overflow:hidden;background:#04070e;">
   <img src="file:///{assets}/logo/cover.jpg"
@@ -251,7 +257,7 @@ COVER = """
   <div style="position:absolute;left:13mm;top:13mm;width:144mm;height:214mm;
        border:0.5pt solid rgba(255,255,255,0.20);"></div>
   <div style="position:absolute;left:22mm;top:24mm;font-family:'Microsoft YaHei',sans-serif;
-       font-size:8pt;letter-spacing:0.55em;color:#e5bd82;">AI AGENT</div>
+       font-size:8pt;letter-spacing:0.55em;color:#e5bd82;">{cover_tag}</div>
   <div style="position:absolute;left:22mm;top:32mm;width:20mm;height:0.9pt;
        background:rgba(229,189,130,0.9);"></div>
   <div style="position:absolute;left:22mm;bottom:100mm;width:128mm;
@@ -264,8 +270,7 @@ COVER = """
        background:#e5bd82;"></div>
   <div style="position:absolute;left:22mm;bottom:42mm;width:122mm;
        font-family:'SimSun',serif;font-size:9pt;line-height:2.2;color:#9fb0c6;">
-       从下一个词预测，到能在真实世界里连续工作数小时的智能体<br>
-       十六章，一条从背景动机走到工程实现的路
+       {cover_note}
   </div>
   <div style="position:absolute;left:22mm;bottom:22mm;font-family:'Microsoft YaHei',sans-serif;
        font-size:11pt;letter-spacing:0.1em;color:#e8eef7;">{author}</div>
@@ -293,10 +298,7 @@ BACK = """
   </div>
   <div style="position:absolute;left:22mm;top:70mm;width:126mm;
        font-family:'SimSun',serif;font-size:9pt;line-height:2.05;color:#bccbdd;">
-       这本书从 2020 年那个只会接着往下写的模型讲起，一路讲到今天可以连续工作几个小时的智能体。
-       每补上一块缺口，就长出一代新技术：思维链让推理露在明处，ReAct 把思考和行动缝在一起，
-       工具协议把接口固定下来，记忆与上下文决定它能走多远，代码和界面把动作真正落到世界上，
-       harness 兜住失败，多 agent 与强化学习把它推向更长、更自主的任务。
+       {back_text}
   </div>
   <div style="position:absolute;left:22mm;top:118mm;width:126mm;
        font-family:'Microsoft YaHei',sans-serif;font-size:8.2pt;line-height:2.4;color:#8fa2b8;">
@@ -355,13 +357,16 @@ def main():
     zero = {"top": "0mm", "bottom": "0mm", "left": "0mm", "right": "0mm"}
     pc = os.path.join(BUILD, "cover.html")
     with open(pc, "w", encoding="utf-8") as f:
-        f.write(page(TITLE, COVER.format(assets=assets, title=TITLE, subtitle=SUBTITLE, author=AUTHOR)))
+        f.write(page(TITLE, COVER.format(assets=assets, title=TITLE, subtitle=SUBTITLE,
+                                         author=AUTHOR, cover_tag=CONFIG.get("cover_tag", "AI AGENT"),
+                                         cover_note=CONFIG.get("cover_note", ""))))
     pdfc = os.path.join(BUILD, "cover.pdf")
     render(pc, pdfc, footer=False, margin=zero)
 
     pb = os.path.join(BUILD, "back.html")
     with open(pb, "w", encoding="utf-8") as f:
-        f.write(page(TITLE, BACK.format(assets=assets, author=AUTHOR)))
+        f.write(page(TITLE, BACK.format(assets=assets, author=AUTHOR,
+                                        back_text=CONFIG.get("back_text", ""))))
     pdfb = os.path.join(BUILD, "back.pdf")
     render(pb, pdfb, footer=False, margin=zero)
 
@@ -377,8 +382,8 @@ def main():
         pg = pages.get(hid, 1) + 1  # 封面占一页
         toc.append([lvl, re.sub(r"<[^>]+>", "", txt), pg])
     out.set_toc(toc)
-    out.set_metadata({"title": TITLE, "author": "Dr. Dezeming",
-                      "subject": SUBTITLE, "keywords": "AI Agent, LLM, ReAct, Harness"})
+    out.set_metadata({"title": TITLE, "author": AUTHOR,
+                      "subject": SUBTITLE, "keywords": CONFIG.get("keywords", "AI Agent, LLM")})
     try:
         out.subset_fonts(verbose=False)
     except Exception as exc:
@@ -409,7 +414,7 @@ def main():
     page_count = len(out)
     out.close()
 
-    guard = os.path.join(ROOT, "book", "build", "checks", "pdf_size_guard.py")
+    guard = os.path.join(ROOT, "build", "checks", "pdf_size_guard.py")
     if os.path.exists(guard):
         result = subprocess.run([sys.executable, guard, target])
         if result.returncode != 0:

@@ -2,9 +2,9 @@
 """保证最终 PDF 不超过体积上限；超限时重采样内嵌图片。
 
 用法：
-    python book/build/checks/pdf_size_guard.py               # 默认检查并尝试压缩主 PDF
-    python book/build/checks/pdf_size_guard.py --check       # 只检查，不修改，超限返回 1
-    python book/build/checks/pdf_size_guard.py path.pdf --limit 20
+    python build/checks/pdf_size_guard.py               # 默认检查并尝试压缩主 PDF
+    python build/checks/pdf_size_guard.py --check       # 只检查，不修改，超限返回 1
+    python build/checks/pdf_size_guard.py path.pdf --limit 20
 """
 from __future__ import annotations
 
@@ -14,8 +14,8 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_PDF = ROOT / "output" / "book.pdf"
+ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_PDF = ROOT / "books" / "ai-agent-foundations" / "output" / "ai-agent-foundations.pdf"
 MIB = 1024 * 1024
 
 
