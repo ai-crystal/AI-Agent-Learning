@@ -10,11 +10,11 @@
 python -m pip install -r books/build/requirements.txt
 ```
 
-每本书有自己的构建入口：
+每本书有自己的根目录构建入口：
 
 ```text
-books/ai-agent-foundations/build.bat
-books/rag-context-rerank/build.bat
+build-ai-agent-foundations.bat
+build-rag-context-rerank.bat
 ```
 
 双击其中一个，只会处理对应书籍，不会重新编译整个系列。命令行等价操作：
@@ -52,7 +52,7 @@ books/<slug>/book.json       书名、副标题、PDF 文件名、年份
 books/<slug>/structure.json  章节顺序的唯一来源
 books/<slug>/README.md       该书 landing page
 books/<slug>/_sidebar.md     该书的 Docsify 侧栏
-books/<slug>/build.bat       只构建该书的入口
+（根目录）build-<slug>.bat  只构建该书的两个入口
 books/<slug>/front/          前言等前置辅文
 books/<slug>/chapters/       chNN.md，唯一一份章节 Markdown
 books/<slug>/appendix/       附录
@@ -61,7 +61,7 @@ books/code/<slug>/chNN/      第 NN 章插图生成脚本
 books/common/                共用绘图库
 output/<pdf>                 该书的 PDF
 books/build/                 系列共用构建、检查与 KaTeX 资源
-books/build/build_book.bat   单书批处理的共用逻辑
+build_book.bat              根目录的单书批处理共用逻辑
 _private/                    本地资料，不进入 Git
 ```
 

@@ -7,7 +7,7 @@ if not defined SLUG (
   exit /b 2
 )
 
-pushd "%~dp0..\.."
+cd /d "%~dp0"
 set "PYEXE="
 for %%P in (
   "C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python312\python.exe"
@@ -22,7 +22,6 @@ if not defined PYEXE (
 )
 if not defined PYEXE (
   echo [ERROR] Python 3.10+ not found.
-  popd
   pause
   exit /b 1
 )
@@ -33,7 +32,6 @@ if errorlevel 1 (
   "%PYEXE%" -m pip install -r books\build\requirements.txt
   if errorlevel 1 (
     echo [ERROR] pip install failed.
-    popd
     pause
     exit /b 1
   )
@@ -43,7 +41,6 @@ echo [2/4] Generate illustrations for %SLUG%
 "%PYEXE%" books\build\render_figures.py --book %SLUG%
 if errorlevel 1 (
   echo [ERROR] Figure generation failed.
-  popd
   pause
   exit /b 1
 )
@@ -52,7 +49,6 @@ echo [3/4] Build %SLUG% PDF
 "%PYEXE%" books\build\build.py --book %SLUG%
 if errorlevel 1 (
   echo [ERROR] PDF build failed.
-  popd
   pause
   exit /b 1
 )
@@ -62,5 +58,4 @@ echo [4/4] Verify %SLUG% text
 
 echo.
 echo Done: output\%SLUG%.pdf
-popd
 pause
