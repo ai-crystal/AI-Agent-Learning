@@ -6,7 +6,7 @@
 
 作者：Dr. Dezeming
 
-[开始阅读：前言](front/preface.md)　·　<a href="output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>
+[开始阅读：前言](front/preface.md)　·　<a href="../../output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>
 
 第一本《从语言模型到智能体》回答的是“模型怎样从预测下一个词走到行动循环”；这一本换一个方向：当答案不在模型参数里，或者不能只靠参数回答时，系统怎样找到资料、判断资料是否相关、把证据组织进上下文，并对最终答案负责。
 
@@ -36,7 +36,7 @@
 
 ## 完整 PDF
 
-<a href="output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载 `output/rag-context-rerank.pdf`</a>
+<a href="../../output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载 `output/rag-context-rerank.pdf`</a>
 
 ## 这本书不做什么
 

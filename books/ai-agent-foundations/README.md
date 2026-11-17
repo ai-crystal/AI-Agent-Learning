@@ -6,7 +6,7 @@
 
 作者：Dr. Dezeming
 
-**[在线阅读](https://ai-crystal.github.io/AI-Agent-Learning/)**　·　**<a href="output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>**
+**[在线阅读](https://ai-crystal.github.io/AI-Agent-Learning/)**　·　**<a href="../../output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载完整 PDF</a>**
 
 这是一本面向零前端、零后端、零机器学习基础读者的 AI Agent 技术书。全书从语言模型的能力边界讲起，逐步走到 ReAct、工具调用、记忆、上下文工程、代码与 GUI、Harness、多 Agent、训练、评测与安全。
 
@@ -48,6 +48,6 @@
 
 ## 完整 PDF
 
-<a href="output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载 `output/ai-agent-foundations.pdf`</a>
+<a href="../../output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载 `output/ai-agent-foundations.pdf`</a>
 
 PDF 包含封面、目录页码、书签和全部插图，适合离线阅读或打印。

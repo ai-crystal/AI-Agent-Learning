@@ -75,8 +75,7 @@
               if (location.hash.indexOf('/README') >= 0) {
                 markdown = markdown.replace(/\]\((front|chapters|appendix)\//g,
                   '](books/' + slug + '/$1/');
-                markdown = markdown.replace(/href="output\//g,
-                  'href="books/' + slug + '/output/');
+                markdown = markdown.replace(/href="\.\.\/\.\.\/output\//g, 'href="output/');
               }
             }
             return markdown;
