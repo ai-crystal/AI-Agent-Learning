@@ -12,8 +12,8 @@
 | --- | --- | ---: | --- | --- |
 | [从语言模型到智能体](books/ai-agent-foundations/README.md) | 基础：从预测下一个词到 Agent 工程 | 187 | [开始阅读](books/ai-agent-foundations/README.md) | <a href="output/ai-agent-foundations.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
 | [RAG 与上下文工程](books/rag-context-rerank/README.md) | 知识：检索、重排序与上下文管理 | 58 | [开始阅读](books/rag-context-rerank/README.md) | <a href="output/rag-context-rerank.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
-| [Agent 工程化](books/agent-engineering/README.md) | 运行：工具、权限、状态、观测与可靠性 | 42 | [开始阅读](books/agent-engineering/README.md) | <a href="output/agent-engineering.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
-| [Agent 企业实战](books/agent-enterprise-cases/README.md) | 交付：六个企业案例与项目方法 | 35 | [开始阅读](books/agent-enterprise-cases/README.md) | <a href="output/agent-enterprise-cases.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
+| [Agent 工程化](books/agent-engineering/README.md) | 运行：工具、权限、状态、观测与可靠性 | 49 | [开始阅读](books/agent-engineering/README.md) | <a href="output/agent-engineering.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
+| [Agent 企业实战](books/agent-enterprise-cases/README.md) | 交付：六个企业案例与项目方法 | 39 | [开始阅读](books/agent-enterprise-cases/README.md) | <a href="output/agent-enterprise-cases.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
 
 ## 知识体系
 
