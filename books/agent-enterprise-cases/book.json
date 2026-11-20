@@ -1,0 +1,12 @@
+{
+  "slug": "agent-enterprise-cases",
+  "title": "Agent 企业实战",
+  "subtitle": "六个案例：从需求、数据、权限到上线",
+  "author": "Dr. Dezeming",
+  "year": "2026",
+  "pdf": "agent-enterprise-cases.pdf",
+  "cover_tag": "AGENT IN PRACTICE / VOL. 4",
+  "cover_note": "案例不是演示，而是一组需要交付、验收和运维的工程约束",
+  "back_text": "客服、合同、研发、数据、流程和知识门户，项目的难点通常不在模型，而在数据边界、审批、失败恢复和验收标准。<br>本书用六个案例展示企业 Agent 项目真正需要处理什么。",
+  "keywords": "AI Agent, enterprise, engineering"
+}

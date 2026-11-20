@@ -15,6 +15,8 @@ python -m pip install -r books/build/requirements.txt
 ```text
 build-ai-agent-foundations.bat
 build-rag-context-rerank.bat
+build-agent-engineering.bat
+build-agent-enterprise-cases.bat
 ```
 
 双击其中一个，只会处理对应书籍，不会重新编译整个系列。命令行等价操作：
@@ -29,6 +31,10 @@ python books/build/checks/verify_pdf_text.py --book ai-agent-foundations
 python books/build/render_figures.py --book rag-context-rerank
 python books/build/build.py --book rag-context-rerank
 python books/build/checks/verify_pdf_text.py --book rag-context-rerank
+
+# 第三、四本
+python books/build/build.py --book agent-engineering
+python books/build/build.py --book agent-enterprise-cases
 ```
 
 站点链接检查可独立运行：

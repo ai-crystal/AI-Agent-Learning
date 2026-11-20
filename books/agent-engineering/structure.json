@@ -1,0 +1,20 @@
+{
+  "front": [
+    "front/preface.md"
+  ],
+  "chapters": [
+    "chapters/ch01.md",
+    "chapters/ch02.md",
+    "chapters/ch03.md",
+    "chapters/ch04.md",
+    "chapters/ch05.md",
+    "chapters/ch06.md",
+    "chapters/ch07.md",
+    "chapters/ch08.md",
+    "chapters/ch09.md",
+    "chapters/ch10.md"
+  ],
+  "appendix": [
+    "appendix/appendix.md"
+  ]
+}

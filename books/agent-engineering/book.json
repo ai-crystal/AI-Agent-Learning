@@ -1,0 +1,12 @@
+{
+  "slug": "agent-engineering",
+  "title": "Agent 工程化",
+  "subtitle": "从原型到生产：运行时、权限、评测与可靠性",
+  "author": "Dr. Dezeming",
+  "year": "2026",
+  "pdf": "agent-engineering.pdf",
+  "cover_tag": "AGENT ENGINEERING / VOL. 3",
+  "cover_note": "把能跑一次的 Agent，变成能长期运行、可审计、可回滚的系统",
+  "back_text": "原型关心“能不能答对”，生产关心“出错时会发生什么”。<br>本书从运行时、工具契约、权限、状态、观测、评测、可靠性和安全几个层面，拆开 Agent 工程化的细节。",
+  "keywords": "AI Agent, enterprise, engineering"
+}
